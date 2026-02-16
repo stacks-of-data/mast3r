@@ -150,6 +150,7 @@ def reconstruct_glomap(glomap_bin, outdir, model, retrieval_model, device, silen
         colmap_db.close()
     except Exception as e:
         print(f'Error {e}')
+        raise e
         colmap_db.close()
         exit(1)
 
