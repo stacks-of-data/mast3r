@@ -41,6 +41,14 @@ if __name__ == '__main__':
     filelist.sort()
     
     os.makedirs("output", exist_ok=True)
-    reconstruct_glomap(args.glomap_bin, "output", model, args.retrieval_model,
-        args.device, args.silent, args.image_size, filelist, args.scenegraph_type,
-        args.winsize, args.win_cyclic, args.refid, args.shared_intrinsics)
+    
+    retrieval_model = getattr(args, 'retrieval_model', None)
+    scenegraph_type = getattr(args, 'scenegraph_type', 'swin')
+    winsize = getattr(args, 'winsize', 1)
+    win_cyclic = getattr(args, 'win_cyclic', False)
+    refid = getattr(args, 'refid', None)
+    shared_intrinsics = getattr(args, 'shared_intrinsics', False)
+    
+    reconstruct_glomap(args.glomap_bin, "output", model, retrieval_model,
+        args.device, args.silent, args.image_size, filelist, scenegraph_type,
+        winsize, win_cyclic, refid, shared_intrinsics)
