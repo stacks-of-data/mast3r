@@ -28,7 +28,7 @@ if __name__ == '__main__':
     model = AsymmetricMASt3R.from_pretrained(weights_path).to(args.device)
     chkpt_tag = hash_md5(weights_path)
     
-    image_dir = Path("path/to/your/images")
+    image_dir = args.images_dir
 
     extensions = {".jpg", ".jpeg", ".png", ".bmp", ".webp"}
 
@@ -37,6 +37,11 @@ if __name__ == '__main__':
         for file_path in image_dir.iterdir():
             if file_path.is_file() and file_path.suffix.lower() in extensions:
                 filelist.append(str(file_path))
+    else:
+        raise ValueError(f"Image directory {image_dir} does not exist.")
+    
+    if len(filelist) == 0:
+        raise ValueError(f"No image files found in directory {image_dir}. Supported extensions are: {extensions}")
 
     filelist.sort()
     
