@@ -169,6 +169,7 @@ def reconstruct_glomap(glomap_bin, outdir, model, retrieval_model, device, silen
     if os.path.isdir(reconstruction_path):
         shutil.rmtree(reconstruction_path)
     os.makedirs(reconstruction_path, exist_ok=True)
+    print("root_path", root_path)
     glomap_run_mapper(glomap_bin, colmap_db_path, reconstruction_path, root_path)
 
 def get_reconstructed_scene(glomap_bin, outdir, gradio_delete_cache, model, retrieval_model, device, silent, image_size,
