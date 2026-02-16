@@ -3,7 +3,7 @@ import os
 import torch
 import argparse
 
-from mast3r.demo_glomap import reconstruct_glomap
+from mast3r.demo_glomap import reconstruct_glomap, get_reconstructed_scene
 from kapture.converter.colmap.database_extra import kapture_to_colmap
 
 from mast3r.model import AsymmetricMASt3R
@@ -83,3 +83,4 @@ if __name__ == '__main__':
         args.refid, 
         args.shared_intrinsics
     )
+    

@@ -248,6 +248,7 @@ def get_reconstructed_scene(glomap_bin, outdir, gradio_delete_cache, model, retr
         colmap_db.close()
     except Exception as e:
         print(f'Error {e}')
+        raise e
         colmap_db.close()
         exit(1)
 
