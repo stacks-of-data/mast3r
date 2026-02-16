@@ -137,26 +137,24 @@ def pycolmap_run_mapper(colmap_db_path, recon_path, image_root_path):
 
 
 def glomap_run_mapper(glomap_bin, colmap_db_path, recon_path, image_root_path):
-    print("running COLMAP Global Mapper")
-    
-    # Ensure output directory exists before running
-    if not os.path.exists(recon_path):
-        os.makedirs(recon_path)
-
+    print("running mapping")
     args = [
-        glomap_bin,          # "colmap"
-        'global_mapper',     # <--- CHANGE THIS from 'mapper'
-        '--database_path', colmap_db_path,
-        '--image_path', image_root_path,
-        '--output_path', recon_path
+        'mapper',
+        '--database_path',
+        colmap_db_path,
+        '--image_path',
+        image_root_path,
+        '--output_path',
+        recon_path
     ]
-    
-    # Run and capture output to help debug if it fails
+    args.insert(0, glomap_bin)
     glomap_process = subprocess.Popen(args)
     glomap_process.wait()
 
     if glomap_process.returncode != 0:
-        raise ValueError(f'Subprocess Error (Return code: {glomap_process.returncode})')
+        raise ValueError(
+            '\nSubprocess Error (Return code:'
+            f' {glomap_process.returncode} )')
 
 
 def kapture_import_image_folder_or_list(images_path: Union[str, Tuple[str, List[str]]], use_single_camera=False) -> kapture.Kapture:
