@@ -53,6 +53,7 @@ def get_filelist(image_dir):
     return filelist
 
 if __name__ == '__main__':
+    torch.serialization.add_safe_globals([argparse.Namespace])
     args = setup_args()
     set_print_with_timestamp()
 
